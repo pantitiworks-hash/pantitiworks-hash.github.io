@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>PTLW SIC-DAY สายการแข่งขัน ROV ม.ปลาย</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;700;900&display=swap"
+      rel="stylesheet"
+    />
     <style>
         body {
             font-family: 'Kanit', sans-serif;
@@ -22,12 +25,14 @@
             background-color: #2d3748;
             border-radius: 0.75rem;
             padding: 1.5rem;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+              0 4px 6px -2px rgba(0, 0, 0, 0.05);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         .card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 20px 25px -5px rgba(252, 145, 58, 0.2), 0 10px 10px -5px rgba(252, 145, 58, 0.1);
+            box-shadow: 0 20px 25px -5px rgba(252, 145, 58, 0.2),
+              0 10px 10px -5px rgba(252, 145, 58, 0.1);
         }
         .vs-circle {
             background-color: #FF4E50;
@@ -61,137 +66,224 @@
             height: 350px;
             max-height: 400px;
         }
+        /* ตารางคะแนน */
+        table {
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #4a5568;
+            padding: 0.5rem 0.75rem;
+        }
+        th {
+            background-color: #2d3748;
+            font-weight: 700;
+        }
+        tbody tr:hover {
+            background-color: #2c5282;
+        }
+        .team-name {
+            font-weight: 700;
+            color: #F9D423;
+        }
+        .score {
+            font-weight: 700;
+            color: #FF4E50;
+        }
+        .winner {
+            font-weight: 900;
+            color: #48bb78; /* สีเขียว */
+        }
     </style>
 </head>
 <body class="antialiased">
 
-    <div class="container mx-auto p-4 md:p-8">
+  <div class="container mx-auto p-4 md:p-8">
 
-        <header class="text-center my-8 md:my-12">
-            <h1 class="text-4xl md:text-6xl font-black uppercase tracking-wider text-glow">PTLW SIC-DAY สายการแข่งขัน ROV ม.ปลาย ROV TOURNAMENT</h1>
-            <p class="text-xl md:text-2xl text-gray-400 mt-2">เส้นทางสู่บัลลังก์แชมป์</p>
-        </header>
+    <header class="text-center my-8 md:my-12">
+      <h1
+        class="text-4xl md:text-6xl font-black uppercase tracking-wider text-glow"
+      >
+        PTLW SIC-DAY สายการแข่งขัน ROV ม.ปลาย ROV TOURNAMENT
+      </h1>
+      <p class="text-xl md:text-2xl text-gray-400 mt-2">
+        เส้นทางสู่บัลลังก์แชมป์
+      </p>
+    </header>
 
-        <section id="overview" class="mb-12">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-                <div class="card flex flex-col justify-center items-center">
-                    <h2 class="text-2xl font-bold text-gray-300">จำนวนทีมทั้งหมด</h2>
-                    <p class="text-6xl font-black text-white" style="color: #FF4E50;">12</p>
-                </div>
-                 <div class="card flex flex-col justify-center items-center">
-                    <h2 class="text-2xl font-bold text-gray-300">จำนวนผู้เข้าแข่งขัน</h2>
-                    <p class="text-6xl font-black text-white" style="color: #FC913A;">61</p>
-                    <p class="text-sm text-gray-400">(รวมผู้เล่นสำรอง)</p>
-                </div>
-                <div class="card">
-                     <h2 class="text-2xl font-bold text-gray-300 mb-4">การแบ่งสายการแข่งขัน</h2>
-                    <div class="chart-container h-64 max-h-64">
-                        <canvas id="bracketDonutChart"></canvas>
-                    </div>
-                </div>
+    <section id="overview" class="mb-12">
+      <div
+        class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center"
+      >
+        <div
+          class="card flex flex-col justify-center items-center"
+        >
+          <h2 class="text-2xl font-bold text-gray-300">
+            จำนวนทีมทั้งหมด
+          </h2>
+          <p
+            class="text-6xl font-black text-white"
+            style="color: #FF4E50"
+          >
+            12
+          </p>
+        </div>
+        <div
+          class="card flex flex-col justify-center items-center"
+        >
+          <h2 class="text-2xl font-bold text-gray-300">
+            จำนวนผู้เข้าแข่งขัน
+          </h2>
+          <p
+            class="text-6xl font-black text-white"
+            style="color: #FC913A"
+          >
+            61
+          </p>
+          <p class="text-sm text-gray-400">(รวมผู้เล่นสำรอง)</p>
+        </div>
+        <div class="card">
+          <h2
+            class="text-2xl font-bold text-gray-300 mb-4"
+          >
+            การแบ่งสายการแข่งขัน
+          </h2>
+          <div class="chart-container h-64 max-h-64">
+            <canvas id="bracketDonutChart"></canvas>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="brackets" class="space-y-16">
+      <div>
+        <h2
+          class="text-3xl md:text-4xl font-bold text-center mb-8 uppercase tracking-wide"
+          style="color: #F9D423"
+        >
+          ⚔️ สาย A ⚔️
+        </h2>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div class="card space-y-4">
+            <div class="text-center">
+              <h3 class="text-2xl font-bold text-white">4/1ดิวะ</h3>
+              <p class="text-sm text-gray-400">
+                กรภัทร, เจ้าพระยา, ธิชาดา, ณัฏฐชัย, พัฒนวัฒน์
+              </p>
             </div>
-        </section>
-
-        <section id="brackets" class="space-y-16">
-            <div>
-                <h2 class="text-3xl md:text-4xl font-bold text-center mb-8 uppercase tracking-wide" style="color: #F9D423;">⚔️ สาย A ⚔️</h2>
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                    
-                    <div class="card space-y-4">
-                        <div class="text-center">
-                            <h3 class="text-2xl font-bold text-white">4/1ดิวะ</h3>
-                            <p class="text-sm text-gray-400">กรภัทร, เจ้าพระยา, ธิชาดา, ณัฏฐชัย, พัฒนวัฒน์</p>
-                        </div>
-                        <div class="flex justify-center items-center">
-                            <div class="vs-circle">VS</div>
-                        </div>
-                        <div class="text-center">
-                            <h3 class="text-2xl font-bold text-white">นักเลงแปลงเกษตร</h3>
-                            <p class="text-sm text-gray-400">พีรพล, กรินทร์, เพทาย, ศิวพล, ปิติภูมิ</p>
-                        </div>
-                    </div>
-
-                    <div class="card space-y-4">
-                        <div class="text-center">
-                            <h3 class="text-2xl font-bold text-white">หาเห็ด</h3>
-                            <p class="text-sm text-gray-400">นภัสสร, กฤติมา, ทัศนีย์, ดวงกมล, จิดาภา</p>
-                        </div>
-                        <div class="flex justify-center items-center">
-                            <div class="vs-circle">VS</div>
-                        </div>
-                        <div class="text-center">
-                            <h3 class="text-2xl font-bold text-white">อาลีนาโด</h3>
-                             <p class="text-sm text-gray-400">ปารินทร์, ภัครดนัย, วรรณพร, อดิศร, อภิชาติ</p>
-                        </div>
-                    </div>
-
-                    <div class="card space-y-4">
-                        <div class="text-center">
-                            <h3 class="text-2xl font-bold text-white">มะเขือม่วง</h3>
-                            <p class="text-sm text-gray-400">ศุภณัฐ, อนุภัทร, พงศ์ปณต, วชิรวิทย์, ปัณณธร</p>
-                        </div>
-                        <div class="flex justify-center items-center">
-                            <div class="vs-circle">VS</div>
-                        </div>
-                        <div class="text-center">
-                            <h3 class="text-2xl font-bold text-white">คายอ้วย</h3>
-                            <p class="text-sm text-gray-400">เสฏฐวุฒิ, สิริโชค, ปัณณทัต, สรวิศ, นิติภูมิ</p>
-                        </div>
-                    </div>
-                </div>
+            <div class="flex justify-center items-center">
+              <div class="vs-circle">VS</div>
             </div>
-
-            <div>
-                <h2 class="text-3xl md:text-4xl font-bold text-center mb-8 uppercase tracking-wide" style="color: #F9D423;">⚔️ สาย B ⚔️</h2>
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                    
-                    <div class="card space-y-4">
-                        <div class="text-center">
-                            <h3 class="text-2xl font-bold text-white">ซุย</h3>
-                            <p class="text-sm text-gray-400">ธนกร, ธนากร, วรเมธ, สดายุ, ชนสรณ์</p>
-                        </div>
-                        <div class="flex justify-center items-center">
-                            <div class="vs-circle">VS</div>
-                        </div>
-                        <div class="text-center">
-                            <h3 class="text-2xl font-bold text-white">น้องน้ำแอลซ่า</h3>
-                            <p class="text-sm text-gray-400">ปัญญา, อรนิชา, พัธพร, สุพัตรา, รัชณีภรณ์</p>
-                        </div>
-                    </div>
-
-                    <div class="card space-y-4">
-                        <div class="text-center">
-                            <h3 class="text-2xl font-bold text-white">LamunNgo</h3>
-                            <p class="text-sm text-gray-400">ชวกิจ, ณัฐริกาณ์, ธนินทร์, จีรนันท์, ประวีณา</p>
-                        </div>
-                        <div class="flex justify-center items-center">
-                            <div class="vs-circle">VS</div>
-                        </div>
-                        <div class="text-center">
-                            <h3 class="text-2xl font-bold text-white">แมงป่องผยองเดช</h3>
-                            <p class="text-sm text-gray-400">ก้องนที, ธีรภัทร, ศุภกฤต, สยาม, วรรณรัตน์</p>
-                        </div>
-                    </div>
-
-                    <div class="card space-y-4">
-                        <div class="text-center">
-                            <h3 class="text-2xl font-bold text-white">นกอ้วนน</h3>
-                            <p class="text-sm text-gray-400">ดนุเดช, ภครวิชญ์, เยาวคุณ, จามจุรี, ปาริชาติ</p>
-                        </div>
-                        <div class="flex justify-center items-center">
-                            <div class="vs-circle">VS</div>
-                        </div>
-                        <div class="text-center">
-                            <h3 class="text-2xl font-bold text-white">WIP01</h3>
-                            <p class="text-sm text-gray-400">อนุชา, นันท์นภัส, อนัญญา, โสรยา, วรัญญา</p>
-                        </div>
-                    </div>
-                </div>
+            <div class="text-center">
+              <h3 class="text-2xl font-bold text-white">นักเลงแปลงเกษตร</h3>
+              <p class="text-sm text-gray-400">
+                พีรพล, กรินทร์, เพทาย, ศิวพล, ปิติภูมิ
+              </p>
             </div>
-        </section>
+          </div>
 
-        <section id="flow" class="my-16">
-             <h2 class="text-3xl md:text-4xl font-bold text-center mb-8 uppercase tracking-wide">เส้นทางสู่แชมป์</h2>
+          <div class="card space-y-4">
+            <div class="text-center">
+              <h3 class="text-2xl font-bold text-white">หาเห็ด</h3>
+              <p class="text-sm text-gray-400">
+                นภัสสร, กฤติมา, ทัศนีย์, ดวงกมล, จิดาภา
+              </p>
+            </div>
+            <div class="flex justify-center items-center">
+              <div class="vs-circle">VS</div>
+            </div>
+            <div class="text-center">
+              <h3 class="text-2xl font-bold text-white">อาลีนาโด</h3>
+              <p class="text-sm text-gray-400">
+                ปารินทร์, ภัครดนัย, วรรณพร, อดิศร, อภิชาติ
+              </p>
+            </div>
+          </div>
+
+          <div class="card space-y-4">
+            <div class="text-center">
+              <h3 class="text-2xl font-bold text-white">มะเขือม่วง</h3>
+              <p class="text-sm text-gray-400">
+                ศุภณัฐ, อนุภัทร, พงศ์ปณต, วชิรวิทย์, ปัณณธร
+              </p>
+            </div>
+            <div class="flex justify-center items-center">
+              <div class="vs-circle">VS</div>
+            </div>
+            <div class="text-center">
+              <h3 class="text-2xl font-bold text-white">คายอ้วย</h3>
+              <p class="text-sm text-gray-400">
+                เสฏฐวุฒิ, สิริโชค, ปัณณทัต, สรวิศ, นิติภูมิ
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <h2
+          class="text-3xl md:text-4xl font-bold text-center mb-8 uppercase tracking-wide"
+          style="color: #F9D423"
+        >
+          ⚔️ สาย B ⚔️
+        </h2>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div class="card space-y-4">
+            <div class="text-center">
+              <h3 class="text-2xl font-bold text-white">ซุย</h3>
+              <p class="text-sm text-gray-400">
+                ธนกร, ธนากร, วรเมธ, สดายุ, ชนสรณ์
+              </p>
+            </div>
+            <div class="flex justify-center items-center">
+              <div class="vs-circle">VS</div>
+            </div>
+            <div class="text-center">
+              <h3 class="text-2xl font-bold text-white">น้องน้ำแอลซ่า</h3>
+              <p class="text-sm text-gray-400">
+                ปัญญา, อรนิชา, พัธพร, สุพัตรา, รัชณีภรณ์
+              </p>
+            </div>
+          </div>
+
+          <div class="card space-y-4">
+            <div class="text-center">
+              <h3 class="text-2xl font-bold text-white">LamunNgo</h3>
+              <p class="text-sm text-gray-400">
+                ชวกิจ, ณัฐริกาณ์, ธนินทร์, จีรนันท์, ประวีณา
+              </p>
+            </div>
+            <div class="flex justify-center items-center">
+              <div class="vs-circle">VS</div>
+            </div>
+            <div class="text-center">
+              <h3 class="text-2xl font-bold text-white">แมงป่องผยองเดช</h3>
+              <p class="text-sm text-gray-400">
+                ก้องนที, ธีรภัทร, ศุภกฤต, สยาม, วรรณรัตน์
+              </p>
+            </div>
+          </div>
+
+          <div class="card space-y-4">
+            <div class="text-center">
+              <h3 class="text-2xl font-bold text-white">นกอ้วนน</h3>
+              <p class="text-sm text-gray-400">
+                ดนุเดช, ภครวิชญ์, เยาวคุณ, จามจุรี, ปาริชาติ
+              </p>
+            </div>
+            <div class="flex justify-center items-center">
+              <div class="vs-circle">VS</div>
+            </div>
+            <div class="text-center">
+              <h3 class="text-2xl font-bold text-white">WIP01</h3>
+              <p class="text-sm text-gray-400">
+                อนุชา, นันท์นภัส, อนัญญา, โสรยา, วรัญญา
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+	  
+	         <h2 class="text-3xl md:text-4xl font-bold text-center mb-8 uppercase tracking-wide">เส้นทางสู่แชมป์</h2>
              <p class="text-center text-gray-400 max-w-2xl mx-auto mb-10">ผู้ชนะของแต่ละสายจะต้องฝ่าฟันคู่ต่อสู้ในรอบต่างๆ เพื่อเข้าชิงความเป็นหนึ่งในรอบชิงชนะเลิศ</p>
              <div class="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-4">
                  <div class="flowchart-step p-4 rounded-lg text-center w-full md:w-auto">
@@ -213,65 +305,383 @@
                      <h3 class="font-black text-2xl text-gray-900">🏆 CHAMPION 🏆</h3>
                  </div>
              </div>
-        </section>
+
+    </section>
+
+    <section id="scoreboard" class="max-w-6xl mx-auto p-6 bg-gray-900 rounded-lg shadow-lg text-gray-200 my-16">
+        <h2 class="text-4xl font-extrabold text-center mb-10" style="color:#F9D423;">ตารางคะแนน ROV ม.ปลาย</h2>
+
+        <div class="mb-12">
+            <h3 class="text-3xl font-bold mb-6" style="color:#FF4E50;">สาย A</h3>
+            <div class="overflow-x-auto">
+                <table class="w-full border-collapse border border-gray-700 text-center text-sm md:text-base">
+                    <thead class="bg-gray-800">
+                        <tr>
+                            <th class="border border-gray-700 p-2">คู่แข่งขัน</th>
+                            <th class="border border-gray-700 p-2">ทีม A (สมาชิก)</th>
+                            <th class="border border-gray-700 p-2">คะแนนทีม A</th>
+                            <th class="border border-gray-700 p-2">ทีม B (สมาชิก)</th>
+                            <th class="border border-gray-700 p-2">คะแนนทีม B</th>
+                            <th class="border border-gray-700 p-2">ชนะ</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="hover:bg-gray-800">
+                            <td class="border border-gray-700 p-2">1</td>
+                            <td class="border border-gray-700 p-2 text-left">
+                                <b class="team-name">4/1 ดิวะ</b><br />
+                                กรภัทร, เจ้าพระยา, ธิชาดา, ณัฏฐชัย, พัฒนวัฒน์
+                            </td>
+                            <td class="border border-gray-700 p-2 font-semibold score">2</td>
+                            <td class="border border-gray-700 p-2 text-left">
+                                <b class="team-name">นักเลงแปลงเกษตร</b><br />
+                                พีรพล, กรินทร์, เพทาย, ศิวพล, ปิติภูมิ
+                            </td>
+                            <td class="border border-gray-700 p-2 font-semibold score">0</td>
+                            <td class="border border-gray-700 p-2 font-bold winner">4/1 ดิวะ</td>
+                        </tr>
+                        <tr class="hover:bg-gray-800">
+                            <td class="border border-gray-700 p-2">2</td>
+                            <td class="border border-gray-700 p-2 text-left">
+                                <b class="team-name">หาเห็ด</b><br />
+                                นภัสสร, กฤติมา, ทัศนีย์, ดวงกมล, จิดาภา
+                            </td>
+                            <td class="border border-gray-700 p-2 font-semibold score">0</td>
+                            <td class="border border-gray-700 p-2 text-left">
+                                <b class="team-name">อาลีนาโด</b><br />
+                                ปารินทร์, ภัครดนัย, วรรณพร, อดิศร, อภิชาติ
+                            </td>
+                            <td class="border border-gray-700 p-2 font-semibold score">2</td>
+                            <td class="border border-gray-700 p-2 font-bold winner">อาลีนาโด</td>
+                        </tr>
+                        <tr class="hover:bg-gray-800">
+                            <td class="border border-gray-700 p-2">3</td>
+                            <td class="border border-gray-700 p-2 text-left">
+                                <b class="team-name">มะเขือม่วง</b><br />
+                                ศุภณัฐ, อนุภัทร, พงศ์ปณต, วชิรวิทย์, ปัณณธร
+                            </td>
+                            <td class="border border-gray-700 p-2 font-semibold score">0</td>
+                            <td class="border border-gray-700 p-2 text-left">
+                                <b class="team-name">คายอ้วย</b><br />
+                                เสฏฐวุฒิ, สิริโชค, ปัณณทัต, สรวิศ, นิติภูมิ
+                            </td>
+                            <td class="border border-gray-700 p-2 font-semibold score">2</td>
+                            <td class="border border-gray-700 p-2 font-bold winner">คายอ้วย</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="mb-12">
+            <h3 class="text-3xl font-bold mb-6" style="color:#FC913A;">สาย B</h3>
+            <div class="overflow-x-auto">
+                <table class="w-full border-collapse border border-gray-700 text-center text-sm md:text-base">
+                    <thead class="bg-gray-800">
+                        <tr>
+                            <th class="border border-gray-700 p-2">คู่แข่งขัน</th>
+                            <th class="border border-gray-700 p-2">ทีม A (สมาชิก)</th>
+                            <th class="border border-gray-700 p-2">คะแนนทีม A</th>
+                            <th class="border border-gray-700 p-2">ทีม B (สมาชิก)</th>
+                            <th class="border border-gray-700 p-2">คะแนนทีม B</th>
+                            <th class="border border-gray-700 p-2">ชนะ</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="hover:bg-gray-800">
+                            <td class="border border-gray-700 p-2">1</td>
+                            <td class="border border-gray-700 p-2 text-left">
+                                <b class="team-name">ซุย</b><br />
+                                ธนกร, ธนากร, วรเมธ, สดายุ, ชนสรณ์
+                            </td>
+                            <td class="border border-gray-700 p-2 font-semibold score">1</td>
+                            <td class="border border-gray-700 p-2 text-left">
+                                <b class="team-name">น้องน้ำแอลซ่า</b><br />
+                                ปัญญา, อรนิชา, พัธพร, สุพัตรา, รัชณีภรณ์
+                            </td>
+                            <td class="border border-gray-700 p-2 font-semibold score">2</td>
+                            <td class="border border-gray-700 p-2 font-bold winner">น้องน้ำแอลซ่า</td>
+                        </tr>
+                        <tr class="hover:bg-gray-800">
+                            <td class="border border-gray-700 p-2">2</td>
+                            <td class="border border-gray-700 p-2 text-left">
+                                <b class="team-name">LamunNgo</b><br />
+                                ชวกิจ, ณัฐริกาณ์, ธนินทร์, จีรนันท์, ประวีณา
+                            </td>
+                            <td class="border border-gray-700 p-2 font-semibold score">0</td>
+                            <td class="border border-gray-700 p-2 text-left">
+                                <b class="team-name">แมงป่องผยองเดช</b><br />
+                                ก้องนที, ธีรภัทร, ศุภกฤต, สยาม, วรรณรัตน์
+                            </td>
+                            <td class="border border-gray-700 p-2 font-semibold score">2</td>
+                            <td class="border border-gray-700 p-2 font-bold winner">แมงป่องผยองเดช</td>
+                        </tr>
+                        <tr class="hover:bg-gray-800">
+                            <td class="border border-gray-700 p-2">3</td>
+                            <td class="border border-gray-700 p-2 text-left">
+                                <b class="team-name">นกอ้วนน</b><br />
+                                ดนุเดช, ภครวิชญ์, เยาวคุณ, จามจุรี, ปาริชาติ
+                            </td>
+                            <td class="border border-gray-700 p-2 font-semibold score">2</td>
+                            <td class="border border-gray-700 p-2 text-left">
+                                <b class="team-name">WIP01</b><br />
+                                อนุชา, นันท์นภัส, อนัญญา, โสรยา, วรัญญา
+                            </td>
+                            <td class="border border-gray-700 p-2 font-semibold score">0</td>
+                            <td class="border border-gray-700 p-2 font-bold winner">นกอ้วนน</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="mb-12">
+            <h3 class="text-2xl font-semibold mb-4" style="color:#FF4E50;">รอบ 2 สาย A</h3>
+            <div class="overflow-x-auto">
+                <table class="w-full border-collapse border border-gray-700 text-center text-sm md:text-base max-w-4xl mx-auto">
+                    <thead class="bg-gray-800">
+                        <tr>
+                            <th class="border border-gray-700 p-2">ทีม A (สมาชิก)</th>
+                            <th class="border border-gray-700 p-2">คะแนน A</th>
+                            <th class="border border-gray-700 p-2">ทีม B (สมาชิก)</th>
+                            <th class="border border-gray-700 p-2">คะแนน B</th>
+                            <th class="border border-gray-700 p-2">ชนะ</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="hover:bg-gray-800">
+                            <td class="border border-gray-700 p-2 text-left">
+                                <b class="team-name">4/1 ดิวะ</b><br />
+                                กรภัทร, เจ้าพระยา, ธิชาดา, ณัฏฐชัย, พัฒนวัฒน์
+                            </td>
+                            <td class="border border-gray-700 p-2 font-semibold score">2</td>
+                            <td class="border border-gray-700 p-2 text-left">
+                                <b class="team-name">อาลีนาโด</b><br />
+                                ปารินทร์, ภัครดนัย, วรรณพร, อดิศร, อภิชาติ
+                            </td>
+                            <td class="border border-gray-700 p-2 font-semibold score">0</td>
+                            <td class="border border-gray-700 p-2 font-bold winner">4/1 ดิวะ</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
         
-        <footer class="text-center mt-12 py-6 border-t border-gray-700">
-            <p class="text-gray-500">ขอให้ทุกทีมโชคดีและสนุกกับการแข่งขัน!</p>
-            <p class="text-gray-500"> discord : https://discord.gg/TxDESt8en7 </p>
-        </footer>
+        <div class="mb-12">
+            <h3 class="text-2xl font-semibold mb-4" style="color:#FC913A;">รอบ 2 สาย B</h3>
+            <div class="overflow-x-auto">
+                <table class="w-full border-collapse border border-gray-700 text-center text-sm md:text-base max-w-4xl mx-auto">
+                    <thead class="bg-gray-800">
+                        <tr>
+                            <th class="border border-gray-700 p-2">ทีม A (สมาชิก)</th>
+                            <th class="border border-gray-700 p-2">คะแนน A</th>
+                            <th class="border border-gray-700 p-2">ทีม B (สมาชิก)</th>
+                            <th class="border border-gray-700 p-2">คะแนน B</th>
+                            <th class="border border-gray-700 p-2">ชนะ</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="hover:bg-gray-800">
+                            <td class="border border-gray-700 p-2 text-left">
+                                <b class="team-name">น้องน้ำแอลซ่า</b><br />
+                                ปัญญา, อรนิชา, พัธพร, สุพัตรา, รัชณีภรณ์
+                            </td>
+                            <td class="border border-gray-700 p-2 font-semibold score">2</td>
+                            <td class="border border-gray-700 p-2 text-left">
+                                <b class="team-name">แมงป่องผยองเดช</b><br />
+                                ก้องนที, ธีรภัทร, ศุภกฤต, สยาม, วรรณรัตน์
+                            </td>
+                            <td class="border border-gray-700 p-2 font-semibold score">1</td>
+                            <td class="border border-gray-700 p-2 font-bold winner">น้องน้ำแอลซ่า</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
 
-    </div>
+        <div class="mb-12">
+             <h3 class="text-2xl font-semibold mb-4" style="color:#FF4E50;">รอบ 3 สาย A</h3>
+             <p class="text-center text-gray-400 mb-4">(ผู้ชนะจากคู่ที่ 3 สาย A พบกับผู้แพ้จากรอบ 2 สาย A)</p>
+             <div class="overflow-x-auto">
+                 <table class="w-full border-collapse border border-gray-700 text-center text-sm md:text-base max-w-4xl mx-auto">
+                    <thead class="bg-gray-800">
+                        <tr>
+                            <th class="border border-gray-700 p-2">ทีม A (สมาชิก)</th>
+                            <th class="border border-gray-700 p-2">คะแนน A</th>
+                            <th class="border border-gray-700 p-2">ทีม B (สมาชิก)</th>
+                            <th class="border border-gray-700 p-2">คะแนน B</th>
+                            <th class="border border-gray-700 p-2">ชนะ</th>
+                        </tr>
+                    </thead>
+                     <tbody>
+                         <tr class="hover:bg-gray-800">
+                             <td class="border border-gray-700 p-2 text-left"><b class="team-name">คายอ้วย</b><br>เสฏฐวุฒิ, สิริโชค, ปัณณทัต, สรวิศ, นิติภูมิ</td>
+                             <td class="border border-gray-700 p-2 font-semibold">TBD</td>
+                             <td class="border border-gray-700 p-2 text-left"><b class="team-name">อาลีนาโด</b><br>ปารินทร์, ภัครดนัย, วรรณพร, อดิศร, อภิชาติ</td>
+                             <td class="border border-gray-700 p-2 font-semibold">TBD</td>
+                             <td class="border border-gray-700 p-2 font-semibold">TBD</td>
+                         </tr>
+                     </tbody>
+                 </table>
+             </div>
+         </div>
+        <div class="mb-12">
+             <h3 class="text-2xl font-semibold mb-4" style="color:#FC913A;">รอบ 3 สาย B</h3>
+              <p class="text-center text-gray-400 mb-4">(ผู้ชนะจากคู่ที่ 3 สาย B พบกับผู้แพ้จากรอบ 2 สาย B)</p>
+             <div class="overflow-x-auto">
+                 <table class="w-full border-collapse border border-gray-700 text-center text-sm md:text-base max-w-4xl mx-auto">
+                    <thead class="bg-gray-800">
+                        <tr>
+                            <th class="border border-gray-700 p-2">ทีม A (สมาชิก)</th>
+                            <th class="border border-gray-700 p-2">คะแนน A</th>
+                            <th class="border border-gray-700 p-2">ทีม B (สมาชิก)</th>
+                            <th class="border border-gray-700 p-2">คะแนน B</th>
+                            <th class="border border-gray-700 p-2">ชนะ</th>
+                        </tr>
+                    </thead>
+                     <tbody>
+                         <tr class="hover:bg-gray-800">
+                             <td class="border border-gray-700 p-2 text-left"><b class="team-name">นกอ้วนน</b><br>ดนุเดช, ภครวิชญ์, เยาวคุณ, จามจุรี, ปาริชาติ</td>
+                             <td class="border border-gray-700 p-2 font-semibold">TBD</td>
+                             <td class="border border-gray-700 p-2 text-left"><b class="team-name">แมงป่องผยองเดช</b><br>ก้องนที, ธีรภัทร, ศุภกฤต, สยาม, วรรณรัตน์</td>
+                             <td class="border border-gray-700 p-2 font-semibold">TBD</td>
+                             <td class="border border-gray-700 p-2 font-semibold">TBD</td>
+                         </tr>
+                     </tbody>
+                 </table>
+             </div>
+         </div>
+        <div class="mb-12">
+             <h3 class="text-2xl font-semibold mb-4" style="color:#FF4E50;">ชิงชนะเลิศ สาย A</h3>
+             <div class="overflow-x-auto">
+                 <table class="w-full border-collapse border border-gray-700 text-center text-sm md:text-base max-w-4xl mx-auto">
+                    <thead class="bg-gray-800">
+                        <tr>
+                            <th class="border border-gray-700 p-2">ทีม A (สมาชิก)</th>
+                            <th class="border border-gray-700 p-2">คะแนน A</th>
+                            <th class="border border-gray-700 p-2">ทีม B (สมาชิก)</th>
+                            <th class="border border-gray-700 p-2">คะแนน B</th>
+                            <th class="border border-gray-700 p-2">ชนะ</th>
+                        </tr>
+                    </thead>
+                     <tbody>
+                         <tr class="hover:bg-gray-800">
+                             <td class="border border-gray-700 p-2 text-left"><b class="team-name">4/1 ดิวะ</b><br>กรภัทร, เจ้าพระยา, ธิชาดา, ณัฏฐชัย, พัฒนวัฒน์</td>
+                             <td class="border border-gray-700 p-2 font-semibold">TBD</td>
+                             <td class="border border-gray-700 p-2 font-semibold">ผู้ชนะ รอบ 3 สาย A</td>
+                             <td class="border border-gray-700 p-2 font-semibold">TBD</td>
+                             <td class="border border-gray-700 p-2 font-semibold">TBD</td>
+                         </tr>
+                     </tbody>
+                 </table>
+             </div>
+         </div>
+        <div class="mb-12">
+             <h3 class="text-2xl font-semibold mb-4" style="color:#FC913A;">ชิงชนะเลิศ สาย B</h3>
+             <div class="overflow-x-auto">
+                 <table class="w-full border-collapse border border-gray-700 text-center text-sm md:text-base max-w-4xl mx-auto">
+                    <thead class="bg-gray-800">
+                        <tr>
+                            <th class="border border-gray-700 p-2">ทีม A (สมาชิก)</th>
+                            <th class="border border-gray-700 p-2">คะแนน A</th>
+                            <th class="border border-gray-700 p-2">ทีม B (สมาชิก)</th>
+                            <th class="border border-gray-700 p-2">คะแนน B</th>
+                            <th class="border border-gray-700 p-2">ชนะ</th>
+                        </tr>
+                    </thead>
+                     <tbody>
+                         <tr class="hover:bg-gray-800">
+                             <td class="border border-gray-700 p-2 text-left"><b class="team-name">น้องน้ำแอลซ่า</b><br>ปัญญา, อรนิชา, พัธพร, สุพัตรา, รัชณีภรณ์</td>
+                             <td class="border border-gray-700 p-2 font-semibold">TBD</td>
+                             <td class="border border-gray-700 p-2 font-semibold">ผู้ชนะ รอบ 3 สาย B</td>
+                             <td class="border border-gray-700 p-2 font-semibold">TBD</td>
+                             <td class="border border-gray-700 p-2 font-semibold">TBD</td>
+                         </tr>
+                     </tbody>
+                 </table>
+             </div>
+         </div>
+        <div class="mb-12">
+             <h3 class="text-2xl font-semibold mb-4 text-center" style="color:#F9D423;">🏆 รอบ CHAMPION 🏆</h3>
+             <div class="overflow-x-auto">
+                 <table class="w-full border-collapse border border-gray-700 text-center text-sm md:text-base max-w-4xl mx-auto">
+                    <thead class="bg-gray-800">
+                        <tr>
+                            <th class="border border-gray-700 p-2">แชมป์สาย A</th>
+                            <th class="border border-gray-700 p-2">คะแนน</th>
+                            <th class="border border-gray-700 p-2">แชมป์สาย B</th>
+                            <th class="border border-gray-700 p-2">คะแนน</th>
+                            <th class="border border-gray-700 p-2">CHAMPION</th>
+                        </tr>
+                    </thead>
+                     <tbody>
+                         <tr class="hover:bg-gray-800">
+                             <td class="border border-gray-700 p-2 font-semibold">TBD</td>
+                             <td class="border border-gray-700 p-2 font-semibold">TBD</td>
+                             <td class="border border-gray-700 p-2 font-semibold">TBD</td>
+                             <td class="border border-gray-700 p-2 font-semibold">TBD</td>
+                             <td class="border border-gray-700 p-2 font-semibold">TBD</td>
+                         </tr>
+                     </tbody>
+                 </table>
+             </div>
+         </div>
+      
 
-    <script>
-        const ctx = document.getElementById('bracketDonutChart').getContext('2d');
-        new Chart(ctx, {
-            type: 'doughnut',
-            data: {
-                labels: ['สาย A', 'สาย B'],
-                datasets: [{
-                    label: 'จำนวนทีม',
-                    data: [6, 6],
-                    backgroundColor: [
-                        '#FF4E50',
-                        '#FC913A'
-                    ],
-                    borderColor: '#2d3748',
-                    borderWidth: 4,
-                    hoverOffset: 8
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                cutout: '70%',
-                plugins: {
-                    legend: {
-                        position: 'bottom',
-                        labels: {
-                            color: '#E2E8F0',
-                            font: {
-                                size: 14,
-                                family: "'Kanit', sans-serif"
-                            }
-                        }
-                    },
-                    tooltip: {
-                        callbacks: {
-                            title: function(tooltipItems) {
-                                const item = tooltipItems[0];
-                                let label = item.chart.data.labels[item.dataIndex];
-                                if (Array.isArray(label)) {
-                                  return label.join(' ');
-                                } else {
-                                  return label;
-                                }
-                            }
-                        }
-                    }
-                }
+    </section>
+	
+<footer class="text-center mt-12 py-6 border-t border-gray-700">
+    <p class="text-gray-500">ขอให้ทุกทีมโชคดีและสนุกกับการแข่งขัน!</p>
+    <a href="https://discord.gg/TxDESt8en7" target="_blank" class="inline-flex items-center justify-center mt-3 p-3 bg-[#5865F2] rounded-full hover:scale-110 transform transition">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 24 24" width="32" height="32">
+            <path d="M20.317 4.3698a19.7913 19.7913 0 0 0-4.8851-1.5152.0741.0741 0 0 0-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 0 0-.0785-.0371c-1.6765.327-3.351 1.0224-4.885 1.5152a.0704.0704 0 0 0-.0321.0277C2.3704 9.0458 1.7103 13.5799 2.011 18.0578a.0824.0824 0 0 0 .0312.0561c2.0522 1.5076 4.0413 2.4228 5.993 3.0294a.0777.0777 0 0 0 .0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 0 0-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 0 1-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 0 1 .0776-.0105c3.9272 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 0 1 .0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 0 1-.0066.1276 12.2986 12.2986 0 0 1-1.8732.8914.0766.0766 0 0 0-.0407.1067c.3608.698.7723 1.3628 1.225 1.9932a.076.076 0 0 0 .0842.0286c1.961-.6067 3.95-1.5219 6.0022-3.0294a.077.077 0 0 0 .0312-.0552c.5004-6.8834-.8382-11.385-3.5485-13.6604a.061.061 0 0 0-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0957 2.1568 2.4189 0 1.3333-.9555 2.419-2.1569 2.419zm7.974 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0957 2.1568 2.4189 0 1.3333-.946 2.419-2.1568 2.419z"/>
+        </svg>
+    </a>
+	<p class="text-gray-500">สอบถามรายละเอียดพูดคุย</p>
+</footer>
+	
+	
+
+  </div>
+
+  <script>
+    // Chart Donut แสดงการแบ่งสาย
+    const ctx = document.getElementById('bracketDonutChart').getContext('2d');
+    const bracketDonutChart = new Chart(ctx, {
+      type: 'doughnut',
+      data: {
+        labels: ['สาย A', 'สาย B'],
+        datasets: [{
+          label: 'จำนวนทีม',
+          data: [6, 6], // จำนวนทีมในแต่ละสาย (จากข้อมูล)
+          backgroundColor: [
+            '#FF4E50',
+            '#FC913A',
+          ],
+          hoverOffset: 20,
+          borderWidth: 2,
+          borderColor: '#1a202c',
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'bottom',
+            labels: {
+              color: '#E2E8F0',
+              font: { family: 'Kanit', size: 16, weight: 'bold' }
             }
-        });
-    </script>
+          },
+          tooltip: {
+            enabled: true,
+            callbacks: {
+              label: ctx => ctx.label + ': ' + ctx.parsed + ' ทีม'
+            }
+          }
+        }
+      }
+    });
+  </script>
 </body>
-
 </html>
